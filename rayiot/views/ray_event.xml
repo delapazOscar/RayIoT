@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rayiot_event_popup_form" model="ir.ui.view">
+        <field name="name">ray.event.popup.form</field>
+        <field name="model">ray.event</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <h1 string="Popup Title"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_event_act" model="ir.actions.act_window">
+        <field name="name">Acción personalizada</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ray.event</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="rayiot.view_rayiot_event_popup_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <record id="view_ray_event_form" model="ir.ui.view">
+        <field name="name">ray.event.form</field>
+        <field name="model">ray.event</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="date"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" options="{'open_attachments': True}"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_ray_event_tree" model="ir.ui.view">
+        <field name="name">ray.event.tree</field>
+        <field name="model">ray.event</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_ray_event" model="ir.actions.act_window">
+        <field name="name">Eventos</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ray.event</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+            id="menu_events"
+            name="Eventos"
+            parent="menu_events_root"
+            action="action_ray_event"
+            sequence="10"/>
+</odoo>
