@@ -21,3 +21,22 @@ class Event(models.Model):
         string='Fecha',
         tracking=True
     )
+
+    def get_data(self):
+        return {
+            'name': self.name,
+            'description': self.description,
+            'date': self.date
+        }
+
+    # def create(self):
+    #
+    #     object = self.env['ray.event'].sudo().create(
+    #         {
+    #             'name': "Dante es gay",
+    #             'description': 'Dante es super gay',
+    #             'date':
+    #         }
+    #     )
+    #
+    #     print(object.id)
