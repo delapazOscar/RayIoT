@@ -29,14 +29,12 @@ class Event(models.Model):
             'date': self.date
         }
 
-    # def create(self):
-    #
-    #     object = self.env['ray.event'].sudo().create(
-    #         {
-    #             'name': "Dante es gay",
-    #             'description': 'Dante es super gay',
-    #             'date':
-    #         }
-    #     )
-    #
-    #     print(object.id)
+    def createEvent(self, **vals):
+
+        event = self.create({
+            'name': vals.get('name'),
+            'description': vals.get('description'),
+            'date': vals.get('date'),
+        })
+
+        return event.get_data()
