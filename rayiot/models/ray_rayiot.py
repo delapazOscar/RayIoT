@@ -38,3 +38,18 @@ class Rayiot(models.Model):
         if battery_percentage:
             self.battery_percentage = battery_percentage
 
+        return {
+            'success': True,
+            'message': 'Datos actualizados correctamente!'
+        }
+
+    def get_data(self):
+        data = {
+            'name': self.name,
+            'battery_percentage': self.battery_percentage,
+            'voltage': self.voltage,
+            'current': self.current
+        }
+
+        return data
+
