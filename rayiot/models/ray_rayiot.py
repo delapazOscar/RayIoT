@@ -45,6 +45,7 @@ class Rayiot(models.Model):
 
     def get_data(self):
         data = {
+            'id': self.id,
             'name': self.name,
             'battery_percentage': self.battery_percentage,
             'voltage': self.voltage,
