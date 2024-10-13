@@ -7,7 +7,8 @@
     'data': [
         'security/ir.model.access.csv',
         'views/menu.xml',
-        'views/ray_event.xml'
+        'views/ray_event.xml',
+        'views/ray_rayiot.xml'
 
     ],
     'application': True,
