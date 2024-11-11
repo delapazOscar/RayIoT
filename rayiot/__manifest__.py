@@ -8,7 +8,10 @@
         'security/ir.model.access.csv',
         'views/menu.xml',
         'views/ray_event.xml',
-        'views/ray_rayiot.xml'
+        'views/ray_rayiot.xml',
+        'views/ray_institution.xml',
+        'views/ray_admin.xml',
+        'views/ray_institution_location.xml'
 
     ],
     'application': True,

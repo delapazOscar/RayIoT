@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_ray_institution_tree" model="ir.ui.view">
+        <field name="name">ray.institution.tree</field>
+        <field name="model">ray.institution</field>
+        <field name="arch" type="xml">
+            <tree string="Instituciones">
+                <field name="name"/>
+                <field name="school_type"/>
+                <field name="institution_type"/>
+                <field name="city"/>
+                <field name="state_id"/>
+                <field name="educational_level"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ray_institution_form" model="ir.ui.view">
+        <field name="name">ray.institution.form</field>
+        <field name="model">ray.institution</field>
+        <field name="arch" type="xml">
+            <form string="Institución">
+                <sheet>
+                    <group>
+                        <field name="institution_type"/>
+                        <field name="name"/>
+                        <field name="school_type"/>
+                        <field name="educational_level"/>
+                    </group>
+                    <group>
+                        <field name="address"/>
+                        <field name="city"/>
+                        <field name="state_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_institutions_root" model="ir.actions.act_window">
+        <field name="name">Instituciones</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ray.institution</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+            id="menu_institutions"
+            name="Instituciones"
+            parent="menu_institutions_root"
+            action="action_institutions_root"
+            sequence="10"/>
+
+</odoo>

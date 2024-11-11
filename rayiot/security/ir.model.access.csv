@@ -3,3 +3,7 @@ access_rayiot_event_user,access_rayiot_event_user,model_ray_event,,1,1,1,1
 access_rayiot_event_manager,access_rayiot_event_manager,model_ray_event,,1,1,1,1
 access_rayiot_rayiot_user, access_rayiot_rayiot_user,model_ray_rayiot,,1,1,1,1
 access_rayiot_rayiot_manager,access_rayiot_rayiot_manager,model_ray_rayiot,,1,1,1,1
+access_rayiot_institution_user,access_rayiot_institution_user,model_ray_institution,,1,0,0,0
+access_rayiot_institution_manager,access_rayiot_institution_manager,model_ray_institution,,1,1,1,1
+access_rayiot_admin_manager,access_rayiot_admin_manager,model_ray_admin,,1,1,1,1
+access_rayiot_institution_location_user,access_rayiot_institution_location_user,model_ray_institution_location,,1,1,1,1
