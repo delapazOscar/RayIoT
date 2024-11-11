@@ -6,6 +6,7 @@
     'depends': ['mail'],
     'data': [
         'security/ir.model.access.csv',
+        'data/ray_crons.xml',
         'views/menu.xml',
         'views/ray_event.xml',
         'views/ray_rayiot.xml',
