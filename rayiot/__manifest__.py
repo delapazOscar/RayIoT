@@ -18,6 +18,6 @@
     'application': True,
     'sequence': -10,
     "images": [
-        'static/rayiot.png'
+        'static/module_logo.png'
     ]
 }
