@@ -133,7 +133,7 @@ class Rayiot(models.Model):
     def cron_define_device_state(self):
         one_minute_ago = fields.Datetime.now() - timedelta(minutes=1)
         devices = self.sudo().search([
-            ('active', '=', True)
+            ('active', '=', True),
             ('last_update', '<', one_minute_ago)
         ])
 
