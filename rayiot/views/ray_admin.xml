@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_ray_admin_tree" model="ir.ui.view">
+        <field name="name">ray.admin.tree</field>
+        <field name="model">ray.admin</field>
+        <field name="arch" type="xml">
+            <tree string="Administradores">
+                <field name="name"/>
+                <field name="last_name"/>
+                <field name="institution_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ray_form" model="ir.ui.view">
+        <field name="name">ray.admin.form</field>
+        <field name="model">ray.admin</field>
+        <field name="arch" type="xml">
+            <form string="Administrador">
+                <header>
+                        <button name="action_authorize_admin" type="object" states="pending"
+                                string="Autorizar administrador"/>
+                </header>
+                <header>
+                    <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="last_name"/>
+                        <field name="institution_id"/>
+                    </group>
+                    <group>
+                        <field name="rayiot_ids"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_admins_root" model="ir.actions.act_window">
+        <field name="name">Administradores</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ray.admin</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+            id="menu_admins"
+            name="Administradores"
+            parent="menu_admins_root"
+            action="action_admins_root"
+            sequence="10"/>
+
+</odoo>

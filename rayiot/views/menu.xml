@@ -14,4 +14,15 @@
             name="RayIoT's"
             parent="menu_ray_root"
             sequence="30"/>
+    <menuitem
+            id="menu_institutions_root"
+            name="Instituciones"
+            parent="menu_ray_root"
+            sequence="40"/>
+    <menuitem
+            id="menu_admins_root"
+            name="Administradores"
+            parent="menu_ray_root"
+            sequence="50"/>
+
 </odoo>

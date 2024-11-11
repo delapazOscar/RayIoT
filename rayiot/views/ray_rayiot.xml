@@ -31,12 +31,18 @@
         <field name="model">ray.rayiot</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
+                <header>
+                    <field name="device_state" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
                 <sheet>
                     <group>
                         <field name="name"/>
-                        <field name="voltage"/>
-                        <field name="current"/>
-                        <field name="battery_percentage"/>
+                        <field name="institution_id"/>
+                        <field name="institution_location_id"/>
+                        <field name="identifier"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter">
@@ -53,6 +59,8 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
+                <field name="institution_location_id"/>
+                <field name="state"/>
                 <field name="voltage"/>
                 <field name="current"/>
                 <field name="battery_percentage"/>

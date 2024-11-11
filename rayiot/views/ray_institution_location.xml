@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_ray_institution_location_tree" model="ir.ui.view">
+        <field name="name">ray.institution.location.tree</field>
+        <field name="model">ray.institution.location</field>
+        <field name="arch" type="xml">
+            <tree string="Instituciones">
+                <field name="name"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ray_institution_form" model="ir.ui.view">
+        <field name="name">ray.institution.form</field>
+        <field name="model">ray.institution</field>
+        <field name="arch" type="xml">
+            <form string="Institución">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_institutions_location_root" model="ir.actions.act_window">
+        <field name="name">Ubicaciones en instituciones</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ray.institution.location</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+            id="menu_institutions_locations"
+            name="Ubicaciones en instituciones"
+            parent="menu_institutions_root"
+            action="action_institutions_location_root"
+            sequence="20"/>
+</odoo>
+
