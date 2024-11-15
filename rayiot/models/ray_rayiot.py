@@ -9,7 +9,8 @@ class Rayiot(models.Model):
 
     active = fields.Boolean(
         string="Activo",
-        tracking=True
+        tracking=True,
+        default=True
     )
 
     name = fields.Char(
