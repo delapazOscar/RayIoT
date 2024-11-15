@@ -99,6 +99,36 @@ class RayAdmin(models.Model):
         return data
 
     @api.model
+    def get_admin_by_email(self, email):
+        if not email:
+            return {
+                'success': False,
+                'message': 'El email es requerido'
+            }
+
+        admin = self.env['ray.admin'].sudo().search([
+            ('email', '=', email)
+        ], limit=1)
+
+        if not admin:
+            return {
+                'success': False,
+                'message': 'No hemos encontrado al administrador deseado intenta de nuevo'
+            }
+
+        if admin.state == 'pending':
+            return {
+                'success': False,
+                'message': 'El administrador aún no ha sido autorizado por uno de nuestros agentes'
+            }
+
+        return {
+            'success': True,
+            'data': admin.get_data(),
+            'message': 'Administrador concedido'
+        }
+
+    @api.model
     def create_admin_pending_verification(self, **vals):
 
         if not vals['email'] or not vals['firebase_uid'] or not vals['institution_id'] or not vals['name'] or not vals['last_name']:
