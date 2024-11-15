@@ -114,7 +114,7 @@ class Rayiot(models.Model):
                 self.battery_percentage = battery_percentage
 
         self.last_update = fields.Datetime.now()
-        if self.device_state == 'off':
+        if not self.device_state or self.device_state == 'off':
             self.device_state = 'on'
 
         return {
