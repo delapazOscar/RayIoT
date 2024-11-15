@@ -134,7 +134,7 @@ class RayAdmin(models.Model):
         if not vals['email'] or not vals['firebase_uid'] or not vals['institution_id'] or not vals['name'] or not vals['last_name']:
             return {
                 'success': False,
-                'response': 'Todos los campos son obligatorios'
+                'message': 'Todos los campos son obligatorios'
             }
 
         user_exists = self.env['res.users'].with_context(mail_auto_subscribe_no_notify=True).search([
@@ -143,7 +143,10 @@ class RayAdmin(models.Model):
 
         logging.info(f'user_exists {user_exists}')
         if user_exists:
-            raise UserError("User already exists")
+            return {
+                'success': False,
+                'message': 'El administrador ya existe'
+            }
 
         user = self.env['res.users'].with_context(mail_auto_subscribe_no_notify=True).create({
             'login': vals['email'],
