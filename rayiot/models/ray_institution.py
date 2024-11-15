@@ -53,6 +53,22 @@ class RayInstitution(models.Model):
         tracking=True
     )
 
+    @api.model
+    def get_institutions(self):
+        institutions = self.env['ray.institution'].sudo().search([
+            ('active', '=', True)
+        ])
+
+        data = []
+
+        for institution in institutions:
+            data.append(institution.get_data())
+
+        return {
+            'success': True,
+            'data': data
+        }
+
     def get_data(self):
         data = {
             'id': self.id if self.id else 0,
