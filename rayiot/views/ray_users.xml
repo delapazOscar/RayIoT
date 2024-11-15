@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_ray_user_tree" model="ir.ui.view">
+        <field name="name">ray.user.tree</field>
+        <field name="model">ray.user</field>
+        <field name="arch" type="xml">
+            <tree string="Usuarios">
+                <field name="name"/>
+                <field name="last_name"/>
+                <field name="institution_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_ray_user_form" model="ir.ui.view">
+        <field name="name">ray.user.form</field>
+        <field name="model">ray.user</field>
+        <field name="arch" type="xml">
+            <form string="Usuario">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="last_name"/>
+                        <field name="institution_id"/>
+                        <field name="email"/>
+                        <field name="phone_number"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_users_root" model="ir.actions.act_window">
+        <field name="name">Usuarios</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ray.user</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+            id="menu_users"
+            name="Usuarios"
+            parent="menu_users_root"
+            action="action_users_root"
+            sequence="10"/>
+
+</odoo>

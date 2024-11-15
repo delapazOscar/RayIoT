@@ -22,11 +22,17 @@ class Event(models.Model):
         tracking=True
     )
 
+    rayiot_id = fields.Many2one(
+        string="Dispositivo vinculado al evento",
+        comodel_name="ray.rayiot",
+        tracking=True
+    )
+
     def get_data(self):
         return {
             'name': self.name,
             'description': self.description,
-            'date': self.date
+            'date': str(self.date) if self.date else ''
         }
 
     def createEvent(self, **vals):
@@ -35,6 +41,7 @@ class Event(models.Model):
             'name': vals.get('name'),
             'description': vals.get('description'),
             'date': vals.get('date'),
+            'rayiot_id': vals.get('rayiot_id')
         })
 
         return event.get_data()

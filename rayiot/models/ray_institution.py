@@ -53,4 +53,20 @@ class RayInstitution(models.Model):
         tracking=True
     )
 
+    def get_data(self):
+        data = {
+            'id': self.id if self.id else 0,
+            'active': self.active,
+            'name': self.name if self.name else '',
+            'institution_type': self.institution_type if self.institution_type else '',
+            'school_type': self.school_type if self.school_type else '',
+            'address': self.address if self.address else '',
+            'city': self.city if self.city else '',
+            'state': {
+                'id': self.state_id.id if self.state_id.id else 0,
+                'name': self.state_id.name if self.state_id.name else ''
+            },
+            'education_level': self.educational_level if self.educational_level else ''
+        }
 
+        return data

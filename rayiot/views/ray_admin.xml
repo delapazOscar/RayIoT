@@ -29,9 +29,13 @@
                         <field name="name"/>
                         <field name="last_name"/>
                         <field name="institution_id"/>
+                        <field name="firebase_uid"/>
                     </group>
                     <group>
                         <field name="rayiot_ids"/>
+                    </group>
+                    <group>
+                        <field name="partner_id"/>
                     </group>
                 </sheet>
             </form>

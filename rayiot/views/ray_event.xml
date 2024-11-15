@@ -36,6 +36,7 @@
                         <field name="name"/>
                         <field name="description"/>
                         <field name="date"/>
+                        <field name="rayiot_id"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter">
@@ -54,6 +55,7 @@
                 <field name="name"/>
                 <field name="description"/>
                 <field name="date"/>
+                <field name="rayiot_id"/>
             </tree>
         </field>
     </record>

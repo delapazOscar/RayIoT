@@ -25,4 +25,10 @@
             parent="menu_ray_root"
             sequence="50"/>
 
+    <menuitem
+            id="menu_users_root"
+            name="Usuarios"
+            parent="menu_ray_root"
+            sequence="60"/>
+
 </odoo>

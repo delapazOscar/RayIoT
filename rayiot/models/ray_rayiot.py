@@ -1,6 +1,7 @@
 from odoo import api, fields, models
 from datetime import datetime, timedelta
 import logging
+from odoo.addons.base.models.res_partner import _tz_get
 
 class Rayiot(models.Model):
     _name = "ray.rayiot"
@@ -79,6 +80,9 @@ class Rayiot(models.Model):
         string="Última actualización",
         readonly=True
     )
+
+    tz = fields.Selection(_tz_get, string='Zona horaria del dispositivo', default=lambda self: self._context.get('tz'),
+                          help="Zona horaria utilizada en la APP", tracking=True)
 
     @api.model
     def add_rayiot(self, vals):

@@ -7,3 +7,4 @@ access_rayiot_institution_user,access_rayiot_institution_user,model_ray_institut
 access_rayiot_institution_manager,access_rayiot_institution_manager,model_ray_institution,,1,1,1,1
 access_rayiot_admin_manager,access_rayiot_admin_manager,model_ray_admin,,1,1,1,1
 access_rayiot_institution_location_user,access_rayiot_institution_location_user,model_ray_institution_location,,1,1,1,1
+access_rayiot_user_user,access_rayiot_user_user,model_ray_user,,1,1,1,1
