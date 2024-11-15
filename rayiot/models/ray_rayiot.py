@@ -7,6 +7,11 @@ class Rayiot(models.Model):
     _inherit = ['mail.thread']
     _description = "RayIoT's"
 
+    active = fields.Boolean(
+        string="Activo",
+        tracking=True
+    )
+
     name = fields.Char(
         string='Nombre del dispositivo',
         tracking=True,
