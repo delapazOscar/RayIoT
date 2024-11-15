@@ -88,7 +88,7 @@ class Rayiot(models.Model):
     @api.model
     def add_rayiot(self, vals):
         device = self.sudo().search([
-            ('active', '=', True)
+            ('active', '=', True),
             ('identifier', '=', vals['identifier'])
         ], limit=1)
 
