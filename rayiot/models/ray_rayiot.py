@@ -102,13 +102,16 @@ class Rayiot(models.Model):
         battery_percentage = kwargs.get("battery_percentage", False)
 
         if voltage:
-            self.voltage = voltage
+            if not self.voltage or abs(self.voltage - voltage) >= 1:
+                self.voltage = voltage
 
         if current:
-            self.current = current
+            if not self.current or abs(self.current - current) >= 1:
+                self.current = current
 
         if battery_percentage:
-            self.battery_percentage = battery_percentage
+            if not self.battery_percentage or abs(self.battery_percentage - battery_percentage) >= 1:
+                self.battery_percentage = battery_percentage
 
         self.last_update = fields.Datetime.now()
         if self.device_state == 'off':
@@ -122,10 +125,12 @@ class Rayiot(models.Model):
     def get_data(self):
         data = {
             'id': self.id,
-            'name': self.name,
-            'battery_percentage': self.battery_percentage,
-            'voltage': self.voltage,
-            'current': self.current
+            'name': self.name if self.name else '',
+            'battery_percentage': self.battery_percentage if self.battery_percentage else 0,
+            'voltage': self.voltage if self.voltage else 0,
+            'current': self.current if self.voltage else 0,
+            'device_state': self.device_state if self.device_state else '',
+            'last_update': str(self.last_update) if self.last_update else ''
         }
 
         return data
