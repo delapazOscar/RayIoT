@@ -2,6 +2,7 @@ from odoo import api, fields, models
 from datetime import datetime, timedelta
 import logging
 from odoo.addons.base.models.res_partner import _tz_get
+from .utils.ray_timezone import convert_utc_in_tz
 
 class Rayiot(models.Model):
     _name = "ray.rayiot"
@@ -133,6 +134,7 @@ class Rayiot(models.Model):
         }
 
     def get_data(self):
+        last_update_tz, _ = convert_utc_in_tz(self.last_update, self.tz)
         data = {
             'id': self.id,
             'name': self.name if self.name else '',
@@ -140,7 +142,7 @@ class Rayiot(models.Model):
             'voltage': self.voltage if self.voltage else 0,
             'current': self.current if self.voltage else 0,
             'device_state': self.device_state if self.device_state else '',
-            'last_update': str(self.last_update) if self.last_update else ''
+            'last_update': str(self.last_update_tz) if self.last_update_tz else ''
         }
 
         return data
