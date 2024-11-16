@@ -45,6 +45,7 @@
                         <field name="institution_location_id"/>
                         <field name="identifier"/>
                         <field name="tz"/>
+                        <field name="ip_address"/>
                     </group>
                     <group>
                         <field name="device_state"/>

@@ -85,6 +85,11 @@ class Rayiot(models.Model):
     tz = fields.Selection(_tz_get, string='Zona horaria del dispositivo', default=lambda self: self._context.get('tz'),
                           help="Zona horaria utilizada en la APP", tracking=True)
 
+    ip_address = fields.Char(
+        string="Dirección de IP",
+        tracking=True
+    )
+
     @api.model
     def add_rayiot(self, vals):
         device = self.sudo().search([

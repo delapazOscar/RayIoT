@@ -8,6 +8,7 @@
                 <field name="name"/>
                 <field name="last_name"/>
                 <field name="institution_id"/>
+                <field name="state"/>
             </tree>
         </field>
     </record>
@@ -17,13 +18,18 @@
         <field name="model">ray.user</field>
         <field name="arch" type="xml">
             <form string="Usuario">
+                <header>
+                    <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
                 <sheet>
                     <group>
                         <field name="name"/>
                         <field name="last_name"/>
                         <field name="institution_id"/>
+                        <field name="student_id"/>
                         <field name="email"/>
                         <field name="phone_number"/>
+                        <field name="nfc_id"/>
                     </group>
                 </sheet>
             </form>
