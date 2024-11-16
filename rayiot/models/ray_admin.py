@@ -94,7 +94,8 @@ class RayAdmin(models.Model):
             'last_name': self.last_name if self.last_name else '',
             'email': self.email if self.email else '',
             'firebase_uid': self.firebase_uid if self.firebase_uid else '',
-            'institution': self.institution_id.get_data()
+            'institution': self.institution_id.get_data(),
+            'rayiot_ids': [rayiot.id for rayiot in self.rayiot_ids]
         }
         return data
 
