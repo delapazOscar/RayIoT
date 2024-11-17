@@ -56,6 +56,7 @@ class RayAdmin(models.Model):
 
     def get_data(self):
         data = {
+            'id': self.id,
             'name': self.name if self.name else '',
             'last_name': self.last_name if self.last_name else '',
             'email': self.email if self.email else '',
