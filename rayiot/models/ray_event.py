@@ -49,6 +49,7 @@ class Event(models.Model):
 
     def get_data(self):
         return {
+            'id': self.id,
             'name': self.name,
             'description': self.description,
             'start_date': str(self.start_date) if self.start_date else '',
