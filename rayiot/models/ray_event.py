@@ -43,14 +43,18 @@ class Event(models.Model):
             ('pending', 'Pendiente'),
             ('active', 'Activo'),
             ('done', 'Finalizado')
-        ]
+        ],
+        default='pending'
     )
 
     def get_data(self):
         return {
             'name': self.name,
             'description': self.description,
-            'date': str(self.date) if self.date else ''
+            'start_date': str(self.start_date) if self.start_date else '',
+            'end_date': str(self.end_date) if self.end_date else '',
+            'state': self.state if self.state else '',
+            'rayiot': self.rayiot_id.get_data() if self.rayiot_id else {}
         }
 
     def cron_define_event_state(self):
