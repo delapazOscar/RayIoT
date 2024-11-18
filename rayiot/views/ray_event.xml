@@ -31,11 +31,15 @@
         <field name="model">ray.event</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
                 <sheet>
                     <group>
                         <field name="name"/>
                         <field name="description"/>
-                        <field name="date"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
                         <field name="rayiot_id"/>
                     </group>
                 </sheet>
@@ -53,8 +57,8 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
-                <field name="description"/>
-                <field name="date"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
                 <field name="rayiot_id"/>
             </tree>
         </field>
