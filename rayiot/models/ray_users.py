@@ -140,3 +140,15 @@ class RayAdmin(models.Model):
             'message': 'NFC Establecido con éxito'
         }
 
+    def delete_user(self):
+        self.ensure_one()
+        if not self.exists():
+            return {
+                'success': False,
+                'message': 'El usuario proporcionado no existe'
+            }
+
+        self.write({
+            'active': False
+        })
+

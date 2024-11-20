@@ -213,3 +213,15 @@ class RayAdmin(models.Model):
             'success': True,
             'data': admin.get_data()
         }
+
+    def delete_admin(self):
+        self.ensure_one()
+        if not self.exists():
+            return {
+                'success': False,
+                'message': 'El administrador proporcionado no existe'
+            }
+
+        self.write({
+            'active': False
+        })
