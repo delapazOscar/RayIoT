@@ -148,7 +148,11 @@ class Rayiot(models.Model):
             'current': self.current if self.voltage else 0,
             'device_state': self.device_state if self.device_state else '',
             'last_update': str(last_update_tz) if last_update_tz else '',
-            'institution_id': self.institution_id.id if self.institution_id else 0
+            'institution_id': {
+                'id': self.institution_id.id if self.institution_id else 0,
+                'name': self.institution_id.name if self.institution_id.name else '',
+                'institution_location': self.institution_location_id.name if self.institution_location_id.name else ''
+            }
         }
 
         return data
