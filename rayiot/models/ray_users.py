@@ -103,7 +103,9 @@ class RayAdmin(models.Model):
         })
 
         # Mandar petición a RayIoT
-        # register_mode = self.send_register_mode_rayiot(ray_user, rayiot_id)
+        register_mode = self.send_register_mode_rayiot(ray_user, rayiot_id)
+
+        logging.info(f'RASPBERRY Respondió: {register_mode}')
 
         return {
             'success': True,
@@ -114,7 +116,7 @@ class RayAdmin(models.Model):
         if not user:
             return False
 
-        url = rayiot.ip_address + '/register_mode'
+        url = f'http://{rayiot.ip_address}:5000/register_mode'
 
         data = {
             'user_id': user.id
