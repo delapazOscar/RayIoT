@@ -152,3 +152,8 @@ class RayAdmin(models.Model):
             'active': False
         })
 
+        return {
+            'success': True,
+            'message': 'Haz eliminado el usuario correctamente'
+        }
+
