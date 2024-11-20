@@ -6,7 +6,6 @@ import pytz
 
 class UserEvent(models.Model):
     _name = "ray.user.event"
-    _inherit = ['mail.thread']
     _description = "Eventos de Usuarios RayIoT"
 
     event_id = fields.Many2one(
@@ -26,12 +25,20 @@ class UserEvent(models.Model):
         tracking=True
     )
 
+    def name_get(self):
+        res = []
+        for record in self:
+            name = f"Asistencia usuario {record.user_id.name}, Evento {record.event_id.name}"
+            res.append((record.id, name))
+        return res
+
     def get_data(self):
         data = {
             'event': self.event_id.get_data() if self.event_id else {},
             'user': self.user_id.get_data() if self.user_id else {},
             'access_date': str(self.access_date) if self.access_date else ''
         }
+        return data
 
     @api.model
     def register_assistence(self, nfc_id):
@@ -68,7 +75,7 @@ class UserEvent(models.Model):
         user_event = self.sudo().create({
             'user_id': user.id,
             'event_id': event.id,
-            'access_date': now.replace(tzinfo=None)
+            'access_date': now.replace(tzinfo='America/Mexico_City')
         })
 
         return {
