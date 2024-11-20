@@ -53,7 +53,7 @@ class UserEvent(models.Model):
 
         today_date = fields.Datetime.now()
 
-        now, _ = convert_utc_in_tz(today_date)
+        now, _ = convert_utc_in_tz(today_date, 'America/Mexico_City')
 
         event = self.env['ray.event'].sudo().search([
             ('state', '=', 'active')
