@@ -111,7 +111,7 @@ class RayAdmin(models.Model):
             'firebase_uid': self.firebase_uid if self.firebase_uid else '',
             'institution': self.institution_id.get_data(),
             'rayiot_ids': [rayiot.id for rayiot in self.rayiot_ids],
-            'created_by_id': self.created_by_id if self.created_by_id else 0
+            'created_by_id': self.created_by_id.id if self.created_by_id else 0
         }
         return data
 
