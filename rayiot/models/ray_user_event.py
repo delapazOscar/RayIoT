@@ -51,6 +51,7 @@ class UserEvent(models.Model):
             }
 
         user = self.env['ray.user'].sudo().search([
+            ('active', '=', True),
             ('nfc_id', '=', nfc_id)
         ], limit=1)
 
