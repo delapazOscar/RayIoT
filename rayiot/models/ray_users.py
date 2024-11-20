@@ -103,7 +103,7 @@ class RayAdmin(models.Model):
         })
 
         # Mandar petición a RayIoT
-        register_mode = self.send_register_mode_rayiot(ray_user, rayiot_id)
+        register_mode = self.send_register_mode_rayiot(ray_user, device)
 
         logging.info(f'RASPBERRY Respondió: {register_mode}')
 
