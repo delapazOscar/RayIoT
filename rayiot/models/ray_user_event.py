@@ -3,6 +3,7 @@ from .utils.ray_timezone import convert_utc_in_tz
 from odoo import api, fields, models
 import logging
 import pytz
+from pytz import timezone
 
 class UserEvent(models.Model):
     _name = "ray.user.event"
@@ -59,8 +60,8 @@ class UserEvent(models.Model):
             }
 
         today_date = fields.Datetime.now()
-
-        now, _ = convert_utc_in_tz(today_date, 'America/Mexico_City')
+        user_tz = timezone('America/Mexico_City')
+        local_date = today_date.astimezone(user_tz)
 
         event = self.env['ray.event'].sudo().search([
             ('state', '=', 'active')
@@ -75,7 +76,7 @@ class UserEvent(models.Model):
         user_event = self.sudo().create({
             'user_id': user.id,
             'event_id': event.id,
-            'access_date': now.replace(tzinfo='America/Mexico_City')
+            'access_date': local_date
         })
 
         return {
