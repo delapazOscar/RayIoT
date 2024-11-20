@@ -117,7 +117,7 @@ class RayAdmin(models.Model):
             return False
 
         url = f'http://{rayiot.ip_address}:5000/register_mode'
-
+        logging.info(f'URL RASP: {url}')
         data = {
             'user_id': user.id
         }
