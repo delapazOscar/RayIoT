@@ -62,6 +62,7 @@ class UserEvent(models.Model):
         today_date = fields.Datetime.now()
         user_tz = timezone('America/Mexico_City')
         local_date = today_date.astimezone(user_tz)
+        local_naive_date = local_date.replace(tzinfo=None)
 
         event = self.env['ray.event'].sudo().search([
             ('state', '=', 'active')
@@ -76,7 +77,7 @@ class UserEvent(models.Model):
         user_event = self.sudo().create({
             'user_id': user.id,
             'event_id': event.id,
-            'access_date': local_date
+            'access_date': local_naive_date
         })
 
         return {
