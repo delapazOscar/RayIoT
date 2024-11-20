@@ -70,6 +70,20 @@ class RayAdmin(models.Model):
         readonly=True
     )
 
+    admin_type = fields.Selection(
+        string="Tipo de Administrador",
+        selection=[
+            ('parent', 'Padre'),
+            ('child', 'Hijo')
+        ],
+        required=True,
+        tracking=True
+    )
+    created_by_id = fields.Many2one(
+        string="Creado por",
+        comodel_name="ray.admin"
+    )
+
     def name_get(self):
         res = []
         for record in self:
@@ -87,6 +101,7 @@ class RayAdmin(models.Model):
 
     def get_data(self):
         data = {
+            'admin_type': self.admin_type if self.admin_type else '',
             'id': self.id,
             'active': self.active,
             'state': self.state if self.state else '',
@@ -95,7 +110,8 @@ class RayAdmin(models.Model):
             'email': self.email if self.email else '',
             'firebase_uid': self.firebase_uid if self.firebase_uid else '',
             'institution': self.institution_id.get_data(),
-            'rayiot_ids': [rayiot.id for rayiot in self.rayiot_ids]
+            'rayiot_ids': [rayiot.id for rayiot in self.rayiot_ids],
+            'created_by_id': self.created_by_id if self.created_by_id else 0
         }
         return data
 
@@ -172,3 +188,28 @@ class RayAdmin(models.Model):
         }
 
         return response
+
+    def authorize_admin_by_admin(self, admin_id):
+        if not admin_id:
+            return {
+                'success': False,
+                'message': 'Es necesario proporcionar al administrador que deseas aceptar'
+            }
+
+        admin = self.env['ray.admin'].sudo().browse(admin_id)
+
+        if not admin:
+            return {
+                'success': False,
+                'message': 'No hemos encontrado al administrador que deseas autorizar'
+            }
+
+        if admin.institution_id.id == self.institution_id.id:
+            admin.admin_type = 'child'
+            admin.state = 'active'
+            admin.created_by_id = self.id
+
+        return {
+            'success': True,
+            'data': admin.get_data()
+        }

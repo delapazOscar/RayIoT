@@ -26,6 +26,10 @@
                 </header>
                 <sheet>
                     <group>
+                        <field name="admin_type"/>
+                        <field name="created_by_id"/>
+                    </group>
+                    <group>
                         <field name="name"/>
                         <field name="last_name"/>
                         <field name="institution_id"/>
