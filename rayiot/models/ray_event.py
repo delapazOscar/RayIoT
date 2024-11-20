@@ -3,6 +3,7 @@ from .utils.ray_timezone import convert_utc_in_tz
 from odoo import api, fields, models
 import logging
 import pytz
+from datetime import datetime
 
 class Event(models.Model):
     _name = "ray.event"
