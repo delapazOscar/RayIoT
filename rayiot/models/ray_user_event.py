@@ -68,7 +68,7 @@ class UserEvent(models.Model):
         user_event = self.sudo().create({
             'user_id': user.id,
             'event_id': event.id,
-            'access_date': now
+            'access_date': now.replace(tzinfo=None)
         })
 
         return {
