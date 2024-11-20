@@ -84,13 +84,22 @@ class RayAdmin(models.Model):
                 'message': 'Todos los campos son obligatorios'
             }
 
+        device = self.env['ray.rayiot'].sudo().browse(rayiot_id)
+
+        if not device:
+            return {
+                'success': False,
+                'message': 'Dispositivo RayIoT no encontrado'
+            }
+
         ray_user = self.env['ray.user'].create({
             'name': name,
             'last_name': last_name,
             'email': email,
             'student_id': student_id,
             'phone_number': mobile,
-            'state': 'pending_nfc_id'
+            'state': 'pending_nfc_id',
+            'institution_id': device.institution_id.id
         })
 
         # Mandar petición a RayIoT
