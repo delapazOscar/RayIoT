@@ -35,6 +35,7 @@ class UserEvent(models.Model):
 
     def get_data(self):
         data = {
+            'id': self.id,
             'event': self.event_id.get_data() if self.event_id else {},
             'user': self.user_id.get_data() if self.user_id else {},
             'access_date': str(self.access_date) if self.access_date else ''
