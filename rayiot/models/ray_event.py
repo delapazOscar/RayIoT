@@ -71,13 +71,13 @@ class Event(models.Model):
                 timezone = pytz.timezone(tz)
 
                 # Asegurar que `start_date` y `end_date` sean offset-aware en la zona horaria del dispositivo
-                start_date_tz = event.start_date.astimezone(timezone) if event.start_date.tzinfo else timezone.localize(
-                    event.start_date)
-                end_date_tz = event.end_date.astimezone(timezone) if event.end_date.tzinfo else timezone.localize(
-                    event.end_date)
+                start_date_tz = pytz.utc.localize(event.start_date).astimezone(timezone)
+                end_date_tz = pytz.utc.localize(event.end_date).astimezone(timezone)
 
                 # Convertir `now_utc` a la zona horaria del dispositivo
                 tz_now_in_device_tz = now_utc.astimezone(timezone)
+
+                logging.info(f'start_date_tz: {start_date_tz}, end_date_tz = {end_date_tz}, tz_now_in_device_tz: {tz_now_in_device_tz}')
 
                 # Comparar las fechas
                 if tz_now_in_device_tz > end_date_tz:

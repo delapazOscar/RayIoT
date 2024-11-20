@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_ray_user_event_form" model="ir.ui.view">
+        <field name="name">ray.user.event.form</field>
+        <field name="model">ray.user.event</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="event_id"/>
+                        <field name="user_id"/>
+                        <field name="access_date"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" options="{'open_attachments': True}"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_ray_user_event_tree" model="ir.ui.view">
+        <field name="name">ray.user.event.tree</field>
+        <field name="model">ray.user.event</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="event_id"/>
+                <field name="user_id"/>
+                <field name="access_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_ray_user_event" model="ir.actions.act_window">
+        <field name="name">Eventos de usuarios</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ray.user.event</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+            id="menu_user_events"
+            name="Eventos de usuarios"
+            parent="menu_events_root"
+            action="action_ray_user_event"
+            sequence="20"/>
+</odoo>
