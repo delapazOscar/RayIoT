@@ -4,6 +4,7 @@ from odoo import api, fields, models
 import logging
 import pytz
 from datetime import datetime
+import requests
 
 class Event(models.Model):
     _name = "ray.event"
@@ -87,6 +88,13 @@ class Event(models.Model):
                 elif start_date_tz <= tz_now_in_device_tz <= end_date_tz:
                     event.state = 'active'
                     logging.info(f"Evento '{event.name}' marcado como 'Activo'.")
+                    try:
+                        url = f'https://{event.rayiot_id.ip_address}/attendance_mode'
+                        logging.info(f'URL RASP: {url}')
+                        data = {}
+                        response = requests.post(url, json=data, timeout=2)
+                    except Exception as e:
+                        logging.info(f'Raspberry no respondió : {e}')
                 elif tz_now_in_device_tz < start_date_tz:
                     event.state = 'pending'
                     logging.info(f"Evento '{event.name}' marcado como 'Pendiente'.")
