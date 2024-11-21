@@ -155,6 +155,16 @@ class RayAdmin(models.Model):
                 'message': 'El id del nfc es necesario'
             }
 
+        exist_user = self.env['ray.user'].sudo().search([
+            ('nfc_id', '=', nfc_id)
+        ])
+
+        if exist_user:
+            return {
+                'success': False,
+                'message': 'Este NFC ya está vinculado a un usuario'
+            }
+
         self.write({
             'nfc_id': nfc_id,
             'state': 'active'
