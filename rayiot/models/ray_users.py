@@ -103,9 +103,12 @@ class RayAdmin(models.Model):
         })
 
         # Mandar petición a RayIoT
-        register_mode = self.send_register_mode_rayiot(ray_user, device)
+        try:
+            register_mode = self.send_register_mode_rayiot(ray_user, device)
 
-        logging.info(f'RASPBERRY Respondió: {register_mode}')
+            logging.info(f'RASPBERRY Respondió: {register_mode}')
+        except Exception as e:
+            logging.info(e)
 
         return {
             'success': True,
@@ -121,7 +124,7 @@ class RayAdmin(models.Model):
         data = {
             'user_id': user.id
         }
-        response = requests.post(url, json=data, timeout=60)
+        response = requests.post(url, json=data, timeout=10)
 
         return response
 
