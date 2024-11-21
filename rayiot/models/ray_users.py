@@ -115,6 +115,26 @@ class RayAdmin(models.Model):
             'data': ray_user.get_data()
         }
 
+    def set_register_mode(self):
+        if not self.exists():
+            return {
+                'success': False,
+                'message': 'El usuario no existe'
+            }
+
+        user = self.env['ray.user'].sudo().browse(self.id)
+
+        device = self.env['ray.rayiot'].sudo().search([
+            ('institution_id', '=', user.institution_id.id)
+        ], limit=1)
+
+        self.send_register_mode_rayiot(user, device)
+
+        return {
+            'success': True,
+            'message': 'RayIoT en modo configuración. Escanee su tarjeta nfc'
+        }
+
     def send_register_mode_rayiot(self, user, rayiot):
         if not user:
             return False
