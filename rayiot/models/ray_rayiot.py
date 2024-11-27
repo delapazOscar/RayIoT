@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 import logging
 from odoo.addons.base.models.res_partner import _tz_get
 from .utils.ray_timezone import convert_utc_in_tz
+import requests
 
 class Rayiot(models.Model):
     _name = "ray.rayiot"
@@ -90,6 +91,44 @@ class Rayiot(models.Model):
         tracking=True
     )
 
+    device_mode = fields.Selection(
+        string="Modo del dispositivo",
+        tracking=True,
+        selection=[
+            ('register_assistence', 'Registrar asistencia'),
+            ('register_users', 'Registrar usuarios')
+        ]
+    )
+
+    def change_device_mode(self, device_mode):
+        self.ensure_one()
+        if not self.exists():
+            return {
+                'success': False,
+                'message': 'El dispositivo no existe, intenta con otro'
+            }
+
+        if not device_mode:
+            return {
+                'success': False,
+                'message': 'Tienes que seleccionar el modo del dispositivo'
+            }
+
+        if self.device_mode != 'register_assistence':
+            self.device_mode = device_mode
+            try:
+                url = f'https://{self.ip_address}/attendance_mode'
+                logging.info(f'URL RASP: {url}')
+                data = {}
+                response = requests.post(url, json=data, timeout=2)
+            except Exception as e:
+                logging.info(f'Raspberry no respondió : {e}')
+
+        return {
+            'success': True,
+            'message': 'Modo del dispositivo actualizado correctamente'
+        }
+
     @api.model
     def add_rayiot(self, vals):
         device = self.sudo().search([
@@ -152,7 +191,8 @@ class Rayiot(models.Model):
                 'id': self.institution_id.id if self.institution_id else 0,
                 'name': self.institution_id.name if self.institution_id.name else '',
                 'institution_location': self.institution_location_id.name if self.institution_location_id.name else ''
-            }
+            },
+            'device_mode': self.device_mode if self.device_mode else ''
         }
 
         return data
