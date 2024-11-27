@@ -114,15 +114,15 @@ class Rayiot(models.Model):
                 'message': 'Tienes que seleccionar el modo del dispositivo'
             }
 
-        if self.device_mode != 'register_assistence':
-            self.device_mode = device_mode
-            try:
-                url = f'https://{self.ip_address}/attendance_mode'
-                logging.info(f'URL RASP: {url}')
-                data = {}
-                response = requests.post(url, json=data, timeout=2)
-            except Exception as e:
-                logging.info(f'Raspberry no respondió : {e}')
+
+        self.device_mode = device_mode
+        try:
+            url = f'https://{self.ip_address}/attendance_mode'
+            logging.info(f'URL RASP: {url}')
+            data = {}
+            response = requests.post(url, json=data, timeout=2)
+        except Exception as e:
+            logging.info(f'Raspberry no respondió : {e}')
 
         return {
             'success': True,
